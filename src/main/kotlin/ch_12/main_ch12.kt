@@ -15,8 +15,17 @@ fun main(args: Array<String>) {
     tree.left!!.right!!.value = 5
     tree.right!!.right = Node()
     tree.right!!.right!!.value = 8
-//    recursiveTreeWalkInorder(tree)
-    iterativeTreeWalkInorder(tree)
+
+    tree.left!!.parent = tree
+    tree.right!!.parent = tree
+    tree.right!!.right!!.parent = tree.right
+    tree.left!!.left!!.parent = tree.left
+    tree.left!!.right!!.parent = tree.left
+    recursiveTreeWalkPreorder(tree)
+    print("\n")
+    recursiveTreeWalkInorder(tree)
+    print("\n")
+    recursiveTreeWalkPostorder(tree)
 }
 
 
@@ -59,5 +68,22 @@ fun iterativeTreeWalkInorder(node: Node?) {
                 }
             }
         }
+    }
+}
+
+// 12.1-4
+fun recursiveTreeWalkPreorder(node: Node?) {
+    if (node != null) {
+        print(node.value)
+        recursiveTreeWalkPreorder(node.left)
+        recursiveTreeWalkPreorder(node.right)
+    }
+}
+
+fun recursiveTreeWalkPostorder(node: Node?) {
+    if (node != null) {
+        recursiveTreeWalkPostorder(node.left)
+        recursiveTreeWalkPostorder(node.right)
+        print(node.value)
     }
 }
