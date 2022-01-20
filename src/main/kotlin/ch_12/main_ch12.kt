@@ -19,11 +19,8 @@ fun main(args: Array<String>) {
     tree.right!!.right!!.parent = tree.right
     tree.left!!.left!!.parent = tree.left
     tree.left!!.right!!.parent = tree.left
-    recursiveTreeWalkPreorder(tree)
-    print("\n")
-    recursiveTreeWalkInorder(tree)
-    print("\n")
-    recursiveTreeWalkPostorder(tree)
+    val node = treeMax(tree)
+    print(node.value)
 }
 
 
@@ -96,4 +93,20 @@ fun recursiveTreeWalkPostorder(node: Node?) {
         recursiveTreeWalkPostorder(node.right)
         print(node.value)
     }
+}
+
+fun treeMin(node: Node): Node {
+    var currentNode = node
+    while (currentNode.left != null) {
+        currentNode = currentNode.left!!
+    }
+    return currentNode
+}
+
+fun treeMax(node: Node): Node {
+    var currentNode = node
+    while (currentNode.right != null) {
+        currentNode = currentNode.right!!
+    }
+    return currentNode
 }
