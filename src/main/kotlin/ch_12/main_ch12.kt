@@ -1,7 +1,5 @@
 package ch_12
 
-import kotlin.collections.ArrayDeque
-
 fun main(args: Array<String>) {
     val tree = Node()
     tree.value = 6
@@ -39,6 +37,18 @@ fun treeSearch(node: Node?, searchValue: Int): Node? {
         treeSearch(node.right, searchValue)
     }
 
+}
+
+fun iterativeTreeSearch(node: Node?, searchValue: Int): Node? {
+    var currentNode = node
+    while (currentNode != null && searchValue != currentNode.value) {
+        currentNode = if (searchValue < currentNode.value!!) {
+            currentNode.left
+        } else {
+            currentNode.right
+        }
+    }
+    return currentNode
 }
 
 fun recursiveTreeWalkInorder(node: Node?) {
