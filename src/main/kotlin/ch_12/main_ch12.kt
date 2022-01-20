@@ -19,8 +19,9 @@ fun main(args: Array<String>) {
     tree.right!!.right!!.parent = tree.right
     tree.left!!.left!!.parent = tree.left
     tree.left!!.right!!.parent = tree.left
-    val node = treeMax(tree)
-    print(node.value)
+
+    val result = findSuccessor(tree.left!!.left!!)
+    print(result)
 }
 
 
@@ -109,4 +110,21 @@ fun treeMax(node: Node): Node {
         currentNode = currentNode.right!!
     }
     return currentNode
+}
+
+fun findSuccessor(node: Node) : Node? {
+    if (node.hasRight()) {
+        return treeMin(node.right!!)
+    } else {
+//        go up tree  until we encounter a node that is the left child of its parent
+        var currentNode = node.parent
+        var prevNode = node
+
+
+        while (currentNode != null && prevNode == currentNode.right) {
+            prevNode = currentNode
+            currentNode = currentNode.parent
+        }
+        return currentNode
+    }
 }
