@@ -19,6 +19,34 @@ class Node {
     }
 
     override fun equals(other: Any?): Boolean {
-        return (other is Node) && (other.left == left) && (other.right == right) && (other.parent == parent)
+        val isNode = other is Node
+        if (isNode) {
+            val node = other as Node
+            val isLeftEqual = if (!hasLeft() && !node.hasLeft()) {
+                true
+            } else if (hasLeft() && node.hasLeft()) {
+                left!!.value == node.left!!.value
+            } else {
+                false
+            }
+            val isRightEqual = if (!hasRight() && !node.hasRight()) {
+                true
+            } else if (hasRight() && node.hasRight()) {
+                right!!.value == node.right!!.value
+            } else {
+                false
+            }
+            val isParentEqual = if (!hasParent() && !node.hasParent()) {
+                true
+            } else if (hasParent() && node.hasParent()) {
+                parent!!.value == node.parent!!.value
+            } else {
+                false
+            }
+            return isLeftEqual && isRightEqual && isParentEqual
+        }
+
+        return false
+
     }
 }
