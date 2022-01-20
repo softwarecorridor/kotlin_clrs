@@ -22,6 +22,7 @@ class Node {
         val isNode = other is Node
         if (isNode) {
             val node = other as Node
+            val isValueEqual = value == other.value
             val isLeftEqual = if (!hasLeft() && !node.hasLeft()) {
                 true
             } else if (hasLeft() && node.hasLeft()) {
@@ -43,7 +44,7 @@ class Node {
             } else {
                 false
             }
-            return isLeftEqual && isRightEqual && isParentEqual
+            return isValueEqual && isLeftEqual && isRightEqual && isParentEqual
         }
 
         return false
