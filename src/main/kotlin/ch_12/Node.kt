@@ -47,6 +47,9 @@ class Node {
         }
 
         return false
+    }
 
+    override fun toString(): String {
+        return "Node(value=$value, parent=${parent?.value}, left=${left?.value}, right=${right?.value})"
     }
 }
