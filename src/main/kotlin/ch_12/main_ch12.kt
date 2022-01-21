@@ -20,7 +20,7 @@ fun main(args: Array<String>) {
     tree.left!!.left!!.parent = tree.left
     tree.left!!.right!!.parent = tree.left
 
-    val result = findPredecessor(tree)
+    val result = treeMaxRecursive(tree)
     print(result)
 }
 
@@ -112,7 +112,24 @@ fun treeMax(node: Node): Node {
     return currentNode
 }
 
-fun findSuccessor(node: Node) : Node? {
+// 12.2-2
+fun treeMinRecursive(node: Node): Node? {
+    if (node.left != null) {
+        return treeMinRecursive(node.left!!)
+    }
+    return node
+}
+
+
+fun treeMaxRecursive(node: Node): Node? {
+    if (node.right != null) {
+        return treeMaxRecursive(node.right!!)
+    } else {
+        return node
+    }
+}
+
+fun findSuccessor(node: Node): Node? {
     if (node.hasRight()) {
         return treeMin(node.right!!)
     } else {
@@ -129,7 +146,7 @@ fun findSuccessor(node: Node) : Node? {
 }
 
 // 12.2-3
-fun findPredecessor(node: Node) : Node? {
+fun findPredecessor(node: Node): Node? {
     if (node.hasLeft()) {
         return treeMax(node.left!!)
     } else {
