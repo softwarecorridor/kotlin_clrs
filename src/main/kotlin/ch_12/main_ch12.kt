@@ -20,7 +20,7 @@ fun main(args: Array<String>) {
     tree.left!!.left!!.parent = tree.left
     tree.left!!.right!!.parent = tree.left
 
-    val result = findSuccessor(tree.left!!.left!!)
+    val result = findPredecessor(tree)
     print(result)
 }
 
@@ -120,8 +120,23 @@ fun findSuccessor(node: Node) : Node? {
         var currentNode = node.parent
         var prevNode = node
 
-
         while (currentNode != null && prevNode == currentNode.right) {
+            prevNode = currentNode
+            currentNode = currentNode.parent
+        }
+        return currentNode
+    }
+}
+
+// 12.2-3
+fun findPredecessor(node: Node) : Node? {
+    if (node.hasLeft()) {
+        return treeMax(node.left!!)
+    } else {
+        var currentNode = node.parent
+        var prevNode = node
+
+        while (currentNode != null && prevNode == currentNode.left) {
             prevNode = currentNode
             currentNode = currentNode.parent
         }
