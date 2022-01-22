@@ -20,10 +20,16 @@ fun main(args: Array<String>) {
     tree.left!!.left!!.parent = tree.left
     tree.left!!.right!!.parent = tree.left
 
-    val result = treeMaxRecursive(tree)
-    print(result)
-}
+//    val result = treeMaxRecursive(tree)
+//    print(result)
+    recursiveTreeWalkInorder(tree)
 
+    val nodeToInsert = Node()
+    nodeToInsert.value = 4
+    println("---insert")
+    insert(nodeToInsert, tree)
+    recursiveTreeWalkInorder(tree)
+}
 
 fun treeSearch(node: Node?, searchValue: Int): Node? {
     if (node == null || searchValue == node.value) {
@@ -158,5 +164,25 @@ fun findPredecessor(node: Node): Node? {
             currentNode = currentNode.parent
         }
         return currentNode
+    }
+}
+
+fun insert(node: Node, tree: Node) {
+    var prevNode: Node? = null
+    var currentNode: Node? = tree
+    while (currentNode != null) {
+        prevNode = currentNode
+        if (currentNode.value!! <= node.value!!) {
+            currentNode = currentNode.right
+        } else {
+            currentNode = currentNode.left
+        }
+    }
+
+    node.parent = prevNode
+    if (prevNode!!.value!! <= node.value!!) {
+        prevNode.right = node
+    } else {
+        prevNode.left = node
     }
 }
