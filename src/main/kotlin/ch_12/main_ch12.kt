@@ -27,7 +27,7 @@ fun main(args: Array<String>) {
     val nodeToInsert = Node()
     nodeToInsert.value = 4
     println("---insert")
-    insert(nodeToInsert, tree)
+    insert(tree, nodeToInsert)
     recursiveTreeWalkInorder(tree)
 }
 
@@ -167,7 +167,7 @@ fun findPredecessor(node: Node): Node? {
     }
 }
 
-fun insert(node: Node, tree: Node) {
+fun insert(tree: Node, node: Node) {
     var prevNode: Node? = null
     var currentNode: Node? = tree
     while (currentNode != null) {
