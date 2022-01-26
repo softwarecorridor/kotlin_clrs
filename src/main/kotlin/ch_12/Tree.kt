@@ -184,4 +184,26 @@ class Tree {
         }
     }
 
+    fun insert(node: Node) {
+        var prevNode: Node? = null
+        var currentNode: Node? = root
+        while (currentNode != null) {
+            prevNode = currentNode
+            if (currentNode.value!! <= node.value!!) {
+                currentNode = currentNode.right
+            } else {
+                currentNode = currentNode.left
+            }
+        }
+        node.parent = prevNode
+        if (prevNode == null) {
+            root = node
+        } else if (prevNode.value!! <= node.value!!) {
+            prevNode.right = node
+        } else {
+            prevNode.left = node
+        }
+    }
+
+
 }
