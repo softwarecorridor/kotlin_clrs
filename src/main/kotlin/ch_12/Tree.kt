@@ -2,7 +2,7 @@ package ch_12
 
 class Tree {
     private var root: Node? = null
-    
+
     fun searchRecursive(value: Int): Node? {
         return recursiveTreeSearch(root, value)
     }
@@ -205,7 +205,33 @@ class Tree {
         }
     }
 
-    fun transplant(srcNode : Node, dstNode: Node?) {
+    // 12.3-1
+    fun insertRecursive(node: Node) {
+        if (root == null) {
+            root = node
+        } else {
+            insertRecursiveImpl(null, root, node)
+        }
+    }
+
+    // https://walkccc.me/CLRS/Chap12/12.3/
+    private fun insertRecursiveImpl(parentNode: Node?, currentNode: Node?, nodeToInsert: Node) {
+
+        if (currentNode == null) {
+            nodeToInsert.parent = parentNode
+            if (nodeToInsert.value!! < parentNode!!.value!!) {
+                parentNode.left = nodeToInsert
+            } else {
+                parentNode.right = nodeToInsert;
+            }
+        } else if (nodeToInsert.value!! < currentNode.value!!) {
+            insertRecursiveImpl(currentNode, currentNode.left, nodeToInsert)
+        } else {
+            insertRecursiveImpl(currentNode, currentNode.right, nodeToInsert)
+        }
+    }
+
+    fun transplant(srcNode: Node, dstNode: Node?) {
         if (srcNode.parent == null) {
             root = dstNode
         } else if (srcNode == srcNode.parent!!.left) {
@@ -218,15 +244,14 @@ class Tree {
         }
     }
 
-    fun delete(node : Node) {
+    fun delete(node: Node) {
         if (node.left == null) {
             transplant(node, node.right)
         } else if (node.right == null) {
             transplant(node, node.left)
         } else {
             val successor = minIterative(node.right)
-            if (successor!!.parent != node)
-            {
+            if (successor!!.parent != node) {
                 transplant(successor, successor.right)
                 successor.right = node.right
                 successor.right!!.parent = successor

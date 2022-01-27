@@ -4,12 +4,12 @@ fun main(args: Array<String>) {
     val tree = initTree()
     tree.inorderWalkIterative()
 
-    val nodeToDelete = tree.searchIterative(2)
-    if (nodeToDelete != null) {
-        tree.delete(nodeToDelete)
-        println("delete")
-        tree.inorderWalkIterative()
-    }
+    val nodeToInsert = Node()
+    nodeToInsert.value =4
+    tree.insertRecursive(nodeToInsert)
+    println("\n----")
+    tree.inorderWalkIterative()
+
 }
 
 private fun initTree(): Tree {
@@ -18,7 +18,7 @@ private fun initTree(): Tree {
     for (value in input) {
         val nodeToInsert = Node()
         nodeToInsert.value = value
-        result.insert(nodeToInsert)
+        result.insertRecursive(nodeToInsert)
     }
     return result
 }
