@@ -205,5 +205,37 @@ class Tree {
         }
     }
 
+    fun transplant(srcNode : Node, dstNode: Node?) {
+        if (srcNode.parent == null) {
+            root = dstNode
+        } else if (srcNode == srcNode.parent!!.left) {
+            srcNode.parent!!.left = dstNode
+        } else {
+            srcNode.parent!!.right = dstNode
+        }
+        if (dstNode != null) {
+            dstNode.parent = srcNode.parent
+        }
+    }
+
+    fun delete(node : Node) {
+        if (node.left == null) {
+            transplant(node, node.right)
+        } else if (node.right == null) {
+            transplant(node, node.left)
+        } else {
+            val successor = minIterative(node.right)
+            if (successor!!.parent != node)
+            {
+                transplant(successor, successor.right)
+                successor.right = node.right
+                successor.right!!.parent = successor
+            }
+            transplant(node, successor)
+            successor.left = node.left
+            successor.left!!.parent = successor
+        }
+
+    }
 
 }

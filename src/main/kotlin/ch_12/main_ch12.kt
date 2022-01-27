@@ -3,6 +3,13 @@ package ch_12
 fun main(args: Array<String>) {
     val tree = initTree()
     tree.inorderWalkIterative()
+
+    val nodeToDelete = tree.searchIterative(2)
+    if (nodeToDelete != null) {
+        tree.delete(nodeToDelete)
+        println("delete")
+        tree.inorderWalkIterative()
+    }
 }
 
 private fun initTree(): Tree {
