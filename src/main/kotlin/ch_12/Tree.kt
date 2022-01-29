@@ -1,7 +1,7 @@
 package ch_12
 
 class Tree {
-    private var root: Node? = null
+    var root: Node? = null
 
     fun searchRecursive(value: Int): Node? {
         return recursiveTreeSearch(root, value)
